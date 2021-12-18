@@ -1,0 +1,68 @@
+<div class="example-div1">
+  <mat-card class="example-mat-card">{{content}}</mat-card>
+  <!-- <mat-vertical-stepper linear=true #stepper class="example-mat"> -->
+  <mat-vertical-stepper linear=false #stepper class="example-mat">
+    <mat-step [stepControl]="passwordFormGroup">
+      <form (ngSubmit)="formSubmit1()" [formGroup]="passwordFormGroup" class="form1">
+        <ng-template matStepLabel>{{step1}}</ng-template>
+        <mat-form-field>
+          <input matInput placeholder="请输入你注册的用户名" formControlName="userName" minlength="6" required>
+          <mat-error
+            *ngIf="!passwordFormGroup.controls['userName'].hasError('minlength')
+            &&passwordFormGroup.controls['userName'].dirty
+            &&passwordFormGroup.controls['userName'].hasError('isSame')">
+            用户名已经重名请修改
+          </mat-error>
+          <mat-error *ngIf="passwordFormGroup.controls['userName'].hasError('minlength')">
+            至少输入6位及6位以上的用户名
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input type="password" matInput placeholder="请输入您的密码" formControlName="userPrePassword"
+            required minlength="6">
+          <mat-error *ngIf="passwordFormGroup.controls['userPrePassword'].hasError('minlength')">
+            至少输入6位及6位以上的密码
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input type="password" matInput placeholder="请确认您的密码" formControlName="userPostPassword" required isNotSame>
+          <mat-error *ngIf="passwordFormGroup.controls['userPostPassword'].hasError('isNotSame')">
+            两次输入的密码不一致请修改</mat-error>
+        </mat-form-field>
+        <div>
+          <button type="submit" mat-button matStepperNext>下一步</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="emailCodeFormGroup">
+      <form [formGroup]="emailCodeFormGroup" class="form1">
+        <ng-template matStepLabel>{{step2}}</ng-template>
+        <mat-form-field>
+          <input matInput placeholder="请输入您的电子邮箱" formControlName="email" required email>
+          <mat-error *ngIf="emailCodeFormGroup.controls['email'].hasError('email')">
+            请输入正确的邮箱地址</mat-error>
+        </mat-form-field>
+        <button mat-button (click)="emailSend()" [disabled]="emailCodeFormGroup.controls['email'].hasError('email')
+        ||emailCodeFormGroup.controls['email'].hasError('required')">发送验证信息</button>
+        <mat-form-field>
+          <input matInput placeholder="请输入收到的验证码" formControlName="checkCode" required>
+          <mat-hint *ngIf="checkNumTrue" class="example-hint">验证码输入正确，欢迎您</mat-hint>
+        </mat-form-field>
+        <button mat-button (click)="checkCode()"
+          [disabled]="emailCodeFormGroup.controls['checkCode'].hasError('required')">提交验证码</button>
+        <div>
+          <button (click)="addUser()" mat-button matStepperNext [disabled]="checkNumTrue">下一步</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>完成</ng-template>
+      恭喜您完成了所有的注册.
+      <div>
+        <a routerLink="/" mat-button
+          matStepperPrevious>返回主页
+        </a>
+      </div>
+    </mat-step>
+  </mat-vertical-stepper>
+</div>

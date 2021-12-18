@@ -1,0 +1,40 @@
+<div class="example-div1">
+  <div class="example-div2">
+    <div class="example-div3">
+      <div class="example-div4">
+        <mat-card class="container">
+          <h3 style="text-align: center;">秒速五厘米</h3>
+        </mat-card>
+        <mat-card class="container">
+          <mat-card-content>
+            <p class="example-p" *ngFor="let message1 of mymessage1">
+              {{message1}}
+            </p>
+          </mat-card-content>
+        </mat-card>
+        <mat-card class="container">
+          <mat-card-content>
+            <p class="example-p" *ngFor="let message2 of mymessage2">
+              {{message2}}
+            </p>
+          </mat-card-content>
+        </mat-card>
+        <mat-card class="container" *ngFor="let remark of remarks">
+          <mat-card-subtitle>{{remark.userName}}</mat-card-subtitle>
+          <hr />
+          <mat-card-content>
+            <p>{{remark.userRemark}}</p>
+          </mat-card-content>
+        </mat-card>
+        <mat-card class="container" >
+          <mat-form-field class="example-input">
+            <mat-label>评论</mat-label>
+            <textarea matInput #remark cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1"
+              cdkAutosizeMaxRows="7"></textarea>
+          </mat-form-field>
+          <button mat-button (click)="addRemark(remark.value); remark.value=''">提交</button>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>

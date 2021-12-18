@@ -1,0 +1,17 @@
+<div class="example-div1">
+  <mat-card class="container">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>佘嘉洛</mat-card-title>
+      <mat-card-subtitle>秋意深，四下之人正何为？</mat-card-subtitle>
+    </mat-card-header>
+  </mat-card>
+  <mat-card class="container">
+    <mat-card-content>
+      <h3 style="text-align: center;">欢迎来到Cartoon的世界，在这个充满悲伤的世界里，感谢与你相遇。</h3>
+      <p *ngFor="let myMessage of myMessages" class="example-p">
+        {{myMessage}}
+      </p>
+    </mat-card-content>
+  </mat-card>
+</div>
